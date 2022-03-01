@@ -1,49 +1,31 @@
-const fetchMyIP = require("./iss");
-const fetchCoordsByIP = require("./iss");
-const fetchISSFlyOverTimes = require("./iss");
-const nextISSTimesForMyLocation = require("./iss")
+const { nextISSTimesForMyLocation } = require('./iss');
 
-// fetchMyIP((error, ip) => {
-//   if (error) {
-//     console.log("It didn't work!" , error);
-//     return;
-//   }
-
-//   console.log('It worked! Returned IP:' , ip);
-// });
-
-fetchCoordsByIP("97.108.168.216", (error, coordinates) => {
-  if (error) {
-    console.log("It didn't work!", error);
-    return;
-  }
-
-  console.log("It worked! Returned coordinates:", coordinates);
-});
-
-const exampleCoords = { latitude: "43.5639", longitude: "-79.7172" };
-
-fetchISSFlyOverTimes(exampleCoords, (error, passTimes) => {
+/*
+fetchMyIP((error, ip) => {
   if (error) {
     console.log("It didn't work!" , error);
     return;
   }
-
-  console.log('It worked! Returned flyover times:' , passTimes);
+  console.log('It worked! Returned IP:' , ip);
 });
+fetchCoordsByIP('2001:448a:2061:4b52:50a1:d213:f0a9:c802', (error, coordinates) => {
+  if (error) {
+    console.log("It didn't work!" , error);
+    return;
+  }
+  console.log('It worked! Returned coordinate:', coordinates);
+});
+const coords = {latitude:'-6.1741', longitude:'106.8296'}
+fetchISSFlyOverTimes(coords,(error, passTimes) => {
+  if (error) {
+    console.log("It didn't work!" , error);
+    return;
+  }
+  console.log('It worked! Returned flyover times:', passTimes);
+});
+*/
 
-/** 
- * Input: 
- *   Array of data objects defining the next fly-overs of the ISS.
- *   [ { risetime: <number>, duration: <number> }, ... ]
- * Returns: 
- *   undefined
- * Sideffect: 
- *   Console log messages to make that data more human readable.
- *   Example output:
- *   Next pass at Mon Jun 10 2019 20:11:44 GMT-0700 (Pacific Daylight Time) for 468 seconds!
- */
- const printPassTimes = function(passTimes) {
+const printPassTimes = function(passTimes) {
   for (const pass of passTimes) {
     const datetime = new Date(0);
     datetime.setUTCSeconds(pass.risetime);
